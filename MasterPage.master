@@ -1,0 +1,86 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register Src="~/Controls/TopMenu.ascx" TagPrefix="uc" TagName="TopMenu" %>
+<%@ Register Src="~/Controls/BreadCrumbs.ascx" TagPrefix="uc" TagName="BreadCrumbs" %>
+<%@ Register Src="~/Controls/LeftMenu.ascx" TagPrefix="uc" TagName="LeftMenu" %>
+<%@ Register Src="~/Controls/Search.ascx" TagPrefix="uc" TagName="Search" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" dir="ltr">
+<head runat="server">
+<asp:ContentPlaceHolder id="head" runat="server">
+</asp:ContentPlaceHolder>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>Кемеровская Центральная Юридическая Консультация</title>
+<link href="css/css.css" media="all" rel="stylesheet" type="text/css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body class="sidebar-left">
+<form id="form1" runat="server">
+<!-- Layout -->
+    <div class="clear-block" id="header-region"></div>
+
+    <div id="wrapper">
+    <div class="clear-block" id="container">
+
+        <div id="header">
+            <div id="logo-floater">	
+                <h1><a title="" href="/"><img id="logo" alt="Кем Консалт" src="/css/img/logo.png"><span style="font-size: 20px;">Кемеровская Городская Центральная Юридическая Консультация</span></a></h1>
+            </div>
+
+            <uc:TopMenu runat="server" ID="ucTopMenu" />
+
+            <ul class="links secondary-links">
+                <li style="padding:0;">
+                    <a runat="server" href="~/QuestionAnswer.aspx" class="a_GetConsult"><div class="btn_GetConsult">Получить<br/>бесплатную<br/>консультацию</div></a>
+                </li>
+            </ul>        
+        </div> <!-- /header -->
+
+        <div class="sidebar" id="sidebar-left">
+            <div class="block block-theme">
+                
+                <uc:Search ID="ucSearch" runat="server" />
+
+            </div>
+            <div class="clear-block block block-user" id="block-user-1">
+                <div class="content">
+                    
+                    <uc:LeftMenu runat="server" ID="ucLeftMenu" />
+
+                </div>
+            </div>
+        </div>
+
+        <div id="center">
+            <div id="squeeze">
+                <div class="right-corner">
+                    <div class="left-corner">
+                        
+                        <uc:BreadCrumbs runat="server" ID="ucBreadCrumbs" />
+
+                        <div class="clear-block">
+                            <div class="node" id="node-50">
+                                <div class="content clear-block">
+                                    <asp:ContentPlaceHolder id="content" runat="server"></asp:ContentPlaceHolder>
+                                </div>
+
+                                <div class="clear-block">
+                                    <div class="meta"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="footer">This site Copyright &copy;</div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.left-corner, /.right-corner, /#squeeze, /#center -->
+
+      
+    </div> <!-- /container -->
+  </div>
+<!-- /layout -->
+</form>
+</body>
+</html>

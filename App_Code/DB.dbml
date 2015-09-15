@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="kemconsult" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=TIGRIFERUM-NOTE\SQLEXPRESS;Initial Catalog=kemconsult;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="connection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.News" Member="News">
+    <Type Name="News">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Header" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="PageHeader" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Blog" Member="Blog">
+    <Type Name="Blog">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Header" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Settings" Member="Settings">
+    <Type Name="Settings">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Value" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LeftMenu" Member="LeftMenu">
+    <Type Name="LeftMenu">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ParetnId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="PageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="LeftMenu_LeftMenu" Member="LeftMenu2" ThisKey="id" OtherKey="ParetnId" Type="LeftMenu" />
+      <Association Name="LeftMenu_LeftMenu" Member="LeftMenu1" ThisKey="ParetnId" OtherKey="id" Type="LeftMenu" IsForeignKey="true" />
+      <Association Name="Pages_LeftMenu" Member="Pages" ThisKey="PageID" OtherKey="id" Type="Pages" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TopMenuItem" Member="TopMenuItem">
+    <Type Name="TopMenuItem">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AlternateText" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Pages_TopMenuItem" Member="Pages" ThisKey="PageId" OtherKey="id" Type="Pages" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pages" Member="Pages">
+    <Type Name="Pages">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="DisplayLinkTitle" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Pages_LeftMenu" Member="LeftMenu" ThisKey="id" OtherKey="PageID" Type="LeftMenu" />
+      <Association Name="Pages_TopMenuItem" Member="TopMenuItem" ThisKey="id" OtherKey="PageId" Type="TopMenuItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QA" Member="QA">
+    <Type Name="QA">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Quester" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(64)" CanBeNull="true" />
+      <Column Name="Answer" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Answerer" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Answered" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Header" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="QACategory_QA" Member="QACategory" ThisKey="CategoryId" OtherKey="id" Type="QACategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QACategory" Member="QACategory">
+    <Type Name="QACategory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(1024) NOT NULL" CanBeNull="false" />
+      <Association Name="QACategory_QA" Member="QA" ThisKey="id" OtherKey="CategoryId" Type="QA" />
+    </Type>
+  </Table>
+</Database>
